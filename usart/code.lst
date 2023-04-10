@@ -1,0 +1,159 @@
+
+code.elf:     file format elf32-avr
+
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   8:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  10:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  14:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  18:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  1c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  20:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  24:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  28:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  2c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  30:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  34:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  38:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  3c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  40:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  44:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  48:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  4c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  50:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  54:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  58:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  5c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  60:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  64:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+  74:	0e 94 5a 00 	call	0xb4	; 0xb4 <main>
+  78:	0c 94 bb 00 	jmp	0x176	; 0x176 <_exit>
+
+0000007c <__bad_interrupt>:
+  7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000080 <USART_Init>:
+  80:	10 92 c5 00 	sts	0x00C5, r1	; 0x8000c5 <__TEXT_REGION_LENGTH__+0x7f80c5>
+  84:	80 e1       	ldi	r24, 0x10	; 16
+  86:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7f80c4>
+  8a:	86 e0       	ldi	r24, 0x06	; 6
+  8c:	80 93 c2 00 	sts	0x00C2, r24	; 0x8000c2 <__TEXT_REGION_LENGTH__+0x7f80c2>
+  90:	88 e1       	ldi	r24, 0x18	; 24
+  92:	80 93 c1 00 	sts	0x00C1, r24	; 0x8000c1 <__TEXT_REGION_LENGTH__+0x7f80c1>
+  96:	08 95       	ret
+
+00000098 <USART_SendByte>:
+  98:	90 91 c0 00 	lds	r25, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7f80c0>
+  9c:	95 ff       	sbrs	r25, 5
+  9e:	fc cf       	rjmp	.-8      	; 0x98 <USART_SendByte>
+  a0:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7f80c6>
+  a4:	08 95       	ret
+
+000000a6 <USART_ReceiveByte>:
+  a6:	80 91 c0 00 	lds	r24, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7f80c0>
+  aa:	87 ff       	sbrs	r24, 7
+  ac:	fc cf       	rjmp	.-8      	; 0xa6 <USART_ReceiveByte>
+  ae:	80 91 c6 00 	lds	r24, 0x00C6	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7f80c6>
+  b2:	08 95       	ret
+
+000000b4 <main>:
+  b4:	8e ef       	ldi	r24, 0xFE	; 254
+  b6:	84 b9       	out	0x04, r24	; 4
+  b8:	81 e0       	ldi	r24, 0x01	; 1
+  ba:	85 b9       	out	0x05, r24	; 5
+  bc:	0e 94 40 00 	call	0x80	; 0x80 <USART_Init>
+  c0:	81 e4       	ldi	r24, 0x41	; 65
+  c2:	0e 94 4c 00 	call	0x98	; 0x98 <USART_SendByte>
+  c6:	11 e4       	ldi	r17, 0x41	; 65
+  c8:	8c e4       	ldi	r24, 0x4C	; 76
+  ca:	18 9b       	sbis	0x03, 0	; 3
+  cc:	2b c0       	rjmp	.+86     	; 0x124 <main+0x70>
+  ce:	80 35       	cpi	r24, 0x50	; 80
+  d0:	21 f5       	brne	.+72     	; 0x11a <main+0x66>
+  d2:	8c e4       	ldi	r24, 0x4C	; 76
+  d4:	0e 94 4c 00 	call	0x98	; 0x98 <USART_SendByte>
+  d8:	88 e2       	ldi	r24, 0x28	; 40
+  da:	0e 94 4c 00 	call	0x98	; 0x98 <USART_SendByte>
+  de:	cd 32       	cpi	r28, 0x2D	; 45
+  e0:	81 e0       	ldi	r24, 0x01	; 1
+  e2:	d8 07       	cpc	r29, r24
+  e4:	5c f0       	brlt	.+22     	; 0xfc <main+0x48>
+  e6:	83 e7       	ldi	r24, 0x73	; 115
+  e8:	0e 94 4c 00 	call	0x98	; 0x98 <USART_SendByte>
+  ec:	8c e6       	ldi	r24, 0x6C	; 108
+  ee:	0e 94 4c 00 	call	0x98	; 0x98 <USART_SendByte>
+  f2:	8f e6       	ldi	r24, 0x6F	; 111
+  f4:	0e 94 4c 00 	call	0x98	; 0x98 <USART_SendByte>
+  f8:	87 e7       	ldi	r24, 0x77	; 119
+  fa:	0a c0       	rjmp	.+20     	; 0x110 <main+0x5c>
+  fc:	86 e6       	ldi	r24, 0x66	; 102
+  fe:	0e 94 4c 00 	call	0x98	; 0x98 <USART_SendByte>
+ 102:	81 e6       	ldi	r24, 0x61	; 97
+ 104:	0e 94 4c 00 	call	0x98	; 0x98 <USART_SendByte>
+ 108:	83 e7       	ldi	r24, 0x73	; 115
+ 10a:	0e 94 4c 00 	call	0x98	; 0x98 <USART_SendByte>
+ 10e:	84 e7       	ldi	r24, 0x74	; 116
+ 110:	0e 94 4c 00 	call	0x98	; 0x98 <USART_SendByte>
+ 114:	89 e2       	ldi	r24, 0x29	; 41
+ 116:	0e 94 4c 00 	call	0x98	; 0x98 <USART_SendByte>
+ 11a:	81 e3       	ldi	r24, 0x31	; 49
+ 11c:	0e 94 4c 00 	call	0x98	; 0x98 <USART_SendByte>
+ 120:	8c e4       	ldi	r24, 0x4C	; 76
+ 122:	21 c0       	rjmp	.+66     	; 0x166 <main+0xb2>
+ 124:	8c 34       	cpi	r24, 0x4C	; 76
+ 126:	31 f4       	brne	.+12     	; 0x134 <main+0x80>
+ 128:	80 e5       	ldi	r24, 0x50	; 80
+ 12a:	0e 94 4c 00 	call	0x98	; 0x98 <USART_SendByte>
+ 12e:	c0 e0       	ldi	r28, 0x00	; 0
+ 130:	d0 e0       	ldi	r29, 0x00	; 0
+ 132:	15 c0       	rjmp	.+42     	; 0x15e <main+0xaa>
+ 134:	cd 32       	cpi	r28, 0x2D	; 45
+ 136:	91 e0       	ldi	r25, 0x01	; 1
+ 138:	d9 07       	cpc	r29, r25
+ 13a:	8c f0       	brlt	.+34     	; 0x15e <main+0xaa>
+ 13c:	11 34       	cpi	r17, 0x41	; 65
+ 13e:	11 f0       	breq	.+4      	; 0x144 <main+0x90>
+ 140:	11 e4       	ldi	r17, 0x41	; 65
+ 142:	01 c0       	rjmp	.+2      	; 0x146 <main+0x92>
+ 144:	12 e4       	ldi	r17, 0x42	; 66
+ 146:	81 2f       	mov	r24, r17
+ 148:	0e 94 4c 00 	call	0x98	; 0x98 <USART_SendByte>
+ 14c:	18 99       	sbic	0x03, 0	; 3
+ 14e:	07 c0       	rjmp	.+14     	; 0x15e <main+0xaa>
+ 150:	ef e1       	ldi	r30, 0x1F	; 31
+ 152:	fe e4       	ldi	r31, 0x4E	; 78
+ 154:	31 97       	sbiw	r30, 0x01	; 1
+ 156:	f1 f7       	brne	.-4      	; 0x154 <main+0xa0>
+ 158:	00 c0       	rjmp	.+0      	; 0x15a <main+0xa6>
+ 15a:	00 00       	nop
+ 15c:	f7 cf       	rjmp	.-18     	; 0x14c <main+0x98>
+ 15e:	80 e3       	ldi	r24, 0x30	; 48
+ 160:	0e 94 4c 00 	call	0x98	; 0x98 <USART_SendByte>
+ 164:	80 e5       	ldi	r24, 0x50	; 80
+ 166:	ef e3       	ldi	r30, 0x3F	; 63
+ 168:	fc e9       	ldi	r31, 0x9C	; 156
+ 16a:	31 97       	sbiw	r30, 0x01	; 1
+ 16c:	f1 f7       	brne	.-4      	; 0x16a <main+0xb6>
+ 16e:	00 c0       	rjmp	.+0      	; 0x170 <main+0xbc>
+ 170:	00 00       	nop
+ 172:	21 96       	adiw	r28, 0x01	; 1
+ 174:	aa cf       	rjmp	.-172    	; 0xca <main+0x16>
+
+00000176 <_exit>:
+ 176:	f8 94       	cli
+
+00000178 <__stop_program>:
+ 178:	ff cf       	rjmp	.-2      	; 0x178 <__stop_program>
