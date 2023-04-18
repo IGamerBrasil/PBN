@@ -115,3 +115,70 @@ int free_ppm(struct image_s *image)
 	
 	return -1;
 }
+
+void matrizPix(struct image_s *image){
+	for (int j = 0; j < image->height; j++){
+		for (int i = 0; i < image->width; i++){
+			int g = image->pix[j * image->width + i].g;
+			int r = image->pix[j * image->width + i].r;
+			int b = image->pix[j * image->width + i].b;
+			int novaMatriz[3][3];
+			if(r >= 0 && r <= 74){
+				novaMatriz[0][0] = 0;
+				novaMatriz[1][0] = 0;
+				novaMatriz[2][0] = 0;
+			}
+			else if (r >= 75 && r <= 134){
+				novaMatriz[0][0] = 0;
+				novaMatriz[1][0] = r;
+				novaMatriz[2][0] = 0;
+			}
+			else if(r >= 135 && r <= 179){
+				novaMatriz[0][0] = r;
+				novaMatriz[1][0] = 0;
+				novaMatriz[2][0] = r;
+			}
+			if(g >= 0 && g <= 74){
+				novaMatriz[0][1] = 0;
+				novaMatriz[1][1] = 0;
+				novaMatriz[2][1] = 0;
+			}
+			else if (g >= 75 && g <= 134){
+				novaMatriz[0][1] = 0;
+				novaMatriz[1][1] = g;
+				novaMatriz[2][1] = 0;
+			}
+			else if(g >= 135 && g <= 179){
+				novaMatriz[0][1] = g;
+				novaMatriz[1][1] = 0;
+				novaMatriz[2][1] = g;
+			}
+			if(b >= 0 && b <= 74){
+				novaMatriz[0][2] = 0;
+				novaMatriz[1][2] = 0;
+				novaMatriz[2][2] = 0;
+			}
+			else if (b >= 75 && b <= 134){
+				novaMatriz[0][2] = 0;
+				novaMatriz[1][2] = b;
+				novaMatriz[2][2] = 0;
+			}
+			else if(b >= 135 && b <= 179){
+				novaMatriz[0][2] = b;
+				novaMatriz[1][2] = 0;
+				novaMatriz[2][2] = b;
+			}
+							   
+			for (int k = 0; k < 3; k++) {
+				for(int l = 0; l < 3; l++){
+      				image->pix[j * image->width + i].matrizSub[l][k] = novaMatriz[l][k];
+				}
+    		}
+			// printf("Imagem tem largura %d e altura %d\n",image->width,image->height);
+			// printf("r = %03d, g = %03d, b = %03d\n\n",r,g,b);
+			// printf("(%d,%d)\nr%03d,g%03d,b%03d\nr%03d,g%03d,b%03d\nr%03d,g%03d,b%03d\n\n",j,i,image->pix[j * image->width + i].matrizSub[0][0],image->pix[j * image->width + i].matrizSub[0][1],image->pix[j * image->width + i].matrizSub[0][2],
+			// 																				image->pix[j * image->width + i].matrizSub[1][0],image->pix[j * image->width + i].matrizSub[1][1],image->pix[j * image->width + i].matrizSub[1][2],
+			// 																				image->pix[j * image->width + i].matrizSub[2][0],image->pix[j * image->width + i].matrizSub[2][1],image->pix[j * image->width + i].matrizSub[2][2]);
+		}
+	}
+}
