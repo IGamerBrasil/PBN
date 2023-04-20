@@ -42,41 +42,41 @@ int main()
 				int b2 = imageOriginal->pix[j * imageOriginal->width + i].matrizSub[1][2];
 				int b3 = imageOriginal->pix[j * imageOriginal->width + i].matrizSub[2][2];	
 
-				 image->pix[y * image->width + x].r = r1;
-				 image->pix[y * image->width + x].g = 0;
-				 image->pix[y * image->width + x].b = 0;	
+				image->pix[y * image->width + x].r = r1;
+				image->pix[y * image->width + x].g = 0;
+				image->pix[y * image->width + x].b = 0;	
 
-				 image->pix[(y+1) * image->width + x].r = r2;
-				 image->pix[(y+1) * image->width + x].g = 0;
-				 image->pix[(y+1) * image->width + x].b = 0;	
+				image->pix[(y+1) * image->width + x].r = r2;
+				image->pix[(y+1) * image->width + x].g = 0;
+				image->pix[(y+1) * image->width + x].b = 0;	
 
-				 image->pix[(y+2) * image->width + x].r = r3;
-				 image->pix[(y+2) * image->width + x].g = 0;
-				 image->pix[(y+2) * image->width + x].b = 0;	
+				image->pix[(y+2) * image->width + x].r = r3;
+				image->pix[(y+2) * image->width + x].g = 0;
+				image->pix[(y+2) * image->width + x].b = 0;	
 
-				 image->pix[y * image->width + (x+1)].r = 0;
-				 image->pix[y * image->width + (x+1)].g = g1;
-				 image->pix[y * image->width + (x+1)].b = 0;	
+				image->pix[y * image->width + (x+1)].r = 0;
+				image->pix[y * image->width + (x+1)].g = g1;
+				image->pix[y * image->width + (x+1)].b = 0;	
 
-				 image->pix[(y+1) * image->width + (x+1)].r = 0;
-				 image->pix[(y+1) * image->width + (x+1)].g = g2;
-				 image->pix[(y+1) * image->width + (x+1)].b = 0;	
+				image->pix[(y+1) * image->width + (x+1)].r = 0;
+				image->pix[(y+1) * image->width + (x+1)].g = g2;
+				image->pix[(y+1) * image->width + (x+1)].b = 0;	
 
-				 image->pix[(y+2) * image->width + (x+1)].r = 0;
-				 image->pix[(y+2) * image->width + (x+1)].g = g3;
-				 image->pix[(y+2) * image->width + (x+1)].b = 0;	
+				image->pix[(y+2) * image->width + (x+1)].r = 0;
+				image->pix[(y+2) * image->width + (x+1)].g = g3;
+				image->pix[(y+2) * image->width + (x+1)].b = 0;	
 
-				 image->pix[y * image->width + (x+2)].r = 0;
-				 image->pix[y * image->width + (x+2)].g = 0;
-				 image->pix[y * image->width + (x+2)].b = b1;	
+				image->pix[y * image->width + (x+2)].r = 0;
+				image->pix[y * image->width + (x+2)].g = 0;
+				image->pix[y * image->width + (x+2)].b = b1;	
 
-				 image->pix[(y+1) * image->width + (x+2)].r = 0;
-				 image->pix[(y+1) * image->width + (x+2)].g = 0;
-				 image->pix[(y+1) * image->width + (x+2)].b = b2;	
+				image->pix[(y+1) * image->width + (x+2)].r = 0;
+				image->pix[(y+1) * image->width + (x+2)].g = 0;
+				image->pix[(y+1) * image->width + (x+2)].b = b2;	
 
-				 image->pix[(y+2) * image->width + (x+2)].r = 0;
-				 image->pix[(y+2) * image->width + (x+2)].g = 0;
-				 image->pix[(y+2) * image->width + (x+2)].b = b3;	
+				image->pix[(y+2) * image->width + (x+2)].r = 0;
+				image->pix[(y+2) * image->width + (x+2)].g = 0;
+				image->pix[(y+2) * image->width + (x+2)].b = b3;	
 
 				x+=3;
 			}

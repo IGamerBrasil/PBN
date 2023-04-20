@@ -28,4 +28,20 @@ int main()
           array[i] = i;
     free(array);
 
+
+    //Um jeito de fazer matriz
+    //int* mat = malloc(5 * 5 * sizeof *mat);
+
+    //(int*)*mat referncia para referencia
+    int** mat = malloc(5 * sizeof(int*));
+
+    //alocando espacos para as colunas
+    for(int i=0; i<5; i++)
+        mat[i] = malloc(5 * sizeof(int));
+
+    //garbage collector
+    for(int i=0; i<5; i++)
+        free(mat[i]);
+    free(mat);
+
 }
