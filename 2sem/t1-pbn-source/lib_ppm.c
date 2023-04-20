@@ -156,7 +156,7 @@ void matrizPix(struct image_s *image){
 				novaMatriz[2][1] = 0;
 			}
 			else if (g >= 75 && g <= 134){
-				novaMatriz[0][1] = 0;void matrizPix(struct image_s *image);
+				novaMatriz[0][1] = 0;
 			}
 			else if(g >= 135 && g <= 179){
 				novaMatriz[0][1] = g;
