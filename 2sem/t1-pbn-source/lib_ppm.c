@@ -23,10 +23,7 @@ int read_ppm(char *file, struct image_s *image)
 		return -1;
 		
 	t = fgets(buf, sizeof(buf), fptr);struct image_s data;
-	struct image_s *image = &data;
 
-	struct image_s data1;
-	struct image_s *imageOriginal = &data1;
 	if (!t)
 		goto failread;
 	
@@ -157,6 +154,8 @@ void matrizPix(struct image_s *image){
 			}
 			else if (g >= 75 && g <= 134){
 				novaMatriz[0][1] = 0;
+				novaMatriz[1][1] = g;
+				novaMatriz[2][1] = 0;
 			}
 			else if(g >= 135 && g <= 179){
 				novaMatriz[0][1] = g;
