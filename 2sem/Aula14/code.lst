@@ -40,7 +40,7 @@ Disassembly of section .text:
   70:	de bf       	out	0x3e, r29	; 62
   72:	cd bf       	out	0x3d, r28	; 61
   74:	0e 94 55 00 	call	0xaa	; 0xaa <main>
-  78:	0c 94 70 00 	jmp	0xe0	; 0xe0 <_exit>
+  78:	0c 94 75 00 	jmp	0xea	; 0xea <_exit>
 
 0000007c <__bad_interrupt>:
   7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -70,33 +70,40 @@ Disassembly of section .text:
 
 000000aa <main>:
   aa:	25 9a       	sbi	0x04, 5	; 4
-  ac:	65 e0       	ldi	r22, 0x05	; 5
-  ae:	70 e0       	ldi	r23, 0x00	; 0
-  b0:	80 e0       	ldi	r24, 0x00	; 0
-  b2:	90 e0       	ldi	r25, 0x00	; 0
-  b4:	0e 94 40 00 	call	0x80	; 0x80 <ledLight>
-  b8:	c0 e0       	ldi	r28, 0x00	; 0
-  ba:	d0 e0       	ldi	r29, 0x00	; 0
-  bc:	8a ef       	ldi	r24, 0xFA	; 250
-  be:	90 e0       	ldi	r25, 0x00	; 0
-  c0:	ef e9       	ldi	r30, 0x9F	; 159
-  c2:	ff e0       	ldi	r31, 0x0F	; 15
-  c4:	31 97       	sbiw	r30, 0x01	; 1
-  c6:	f1 f7       	brne	.-4      	; 0xc4 <main+0x1a>
-  c8:	00 c0       	rjmp	.+0      	; 0xca <main+0x20>
-  ca:	00 00       	nop
-  cc:	01 97       	sbiw	r24, 0x01	; 1
-  ce:	c1 f7       	brne	.-16     	; 0xc0 <main+0x16>
-  d0:	f1 e0       	ldi	r31, 0x01	; 1
-  d2:	cf 27       	eor	r28, r31
-  d4:	65 e0       	ldi	r22, 0x05	; 5
-  d6:	70 e0       	ldi	r23, 0x00	; 0
-  d8:	ce 01       	movw	r24, r28
-  da:	0e 94 40 00 	call	0x80	; 0x80 <ledLight>
-  de:	ee cf       	rjmp	.-36     	; 0xbc <main+0x12>
+  ac:	2d 98       	cbi	0x05, 5	; 5
+  ae:	80 e0       	ldi	r24, 0x00	; 0
+  b0:	90 e0       	ldi	r25, 0x00	; 0
+  b2:	20 e0       	ldi	r18, 0x00	; 0
+  b4:	30 e0       	ldi	r19, 0x00	; 0
+  b6:	ef e9       	ldi	r30, 0x9F	; 159
+  b8:	ff e0       	ldi	r31, 0x0F	; 15
+  ba:	31 97       	sbiw	r30, 0x01	; 1
+  bc:	f1 f7       	brne	.-4      	; 0xba <main+0x10>
+  be:	00 c0       	rjmp	.+0      	; 0xc0 <main+0x16>
+  c0:	00 00       	nop
+  c2:	01 96       	adiw	r24, 0x01	; 1
+  c4:	21 15       	cp	r18, r1
+  c6:	31 05       	cpc	r19, r1
+  c8:	51 f4       	brne	.+20     	; 0xde <main+0x34>
+  ca:	2d 98       	cbi	0x05, 5	; 5
+  cc:	80 3d       	cpi	r24, 0xD0	; 208
+  ce:	f7 e0       	ldi	r31, 0x07	; 7
+  d0:	9f 07       	cpc	r25, r31
+  d2:	8c f3       	brlt	.-30     	; 0xb6 <main+0xc>
+  d4:	80 e0       	ldi	r24, 0x00	; 0
+  d6:	90 e0       	ldi	r25, 0x00	; 0
+  d8:	21 e0       	ldi	r18, 0x01	; 1
+  da:	30 e0       	ldi	r19, 0x00	; 0
+  dc:	ec cf       	rjmp	.-40     	; 0xb6 <main+0xc>
+  de:	2d 9a       	sbi	0x05, 5	; 5
+  e0:	88 3e       	cpi	r24, 0xE8	; 232
+  e2:	43 e0       	ldi	r20, 0x03	; 3
+  e4:	94 07       	cpc	r25, r20
+  e6:	3c f3       	brlt	.-50     	; 0xb6 <main+0xc>
+  e8:	e2 cf       	rjmp	.-60     	; 0xae <main+0x4>
 
-000000e0 <_exit>:
-  e0:	f8 94       	cli
+000000ea <_exit>:
+  ea:	f8 94       	cli
 
-000000e2 <__stop_program>:
-  e2:	ff cf       	rjmp	.-2      	; 0xe2 <__stop_program>
+000000ec <__stop_program>:
+  ec:	ff cf       	rjmp	.-2      	; 0xec <__stop_program>
