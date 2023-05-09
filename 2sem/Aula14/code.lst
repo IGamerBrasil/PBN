@@ -39,38 +39,64 @@ Disassembly of section .text:
   6e:	d8 e0       	ldi	r29, 0x08	; 8
   70:	de bf       	out	0x3e, r29	; 62
   72:	cd bf       	out	0x3d, r28	; 61
-  74:	0e 94 40 00 	call	0x80	; 0x80 <main>
-  78:	0c 94 56 00 	jmp	0xac	; 0xac <_exit>
+  74:	0e 94 55 00 	call	0xaa	; 0xaa <main>
+  78:	0c 94 70 00 	jmp	0xe0	; 0xe0 <_exit>
 
 0000007c <__bad_interrupt>:
   7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
-00000080 <main>:
-  80:	25 9a       	sbi	0x04, 5	; 4
-  82:	2d 9a       	sbi	0x05, 5	; 5
-  84:	2f ef       	ldi	r18, 0xFF	; 255
-  86:	84 e3       	ldi	r24, 0x34	; 52
-  88:	9c e0       	ldi	r25, 0x0C	; 12
-  8a:	21 50       	subi	r18, 0x01	; 1
-  8c:	80 40       	sbci	r24, 0x00	; 0
-  8e:	90 40       	sbci	r25, 0x00	; 0
-  90:	e1 f7       	brne	.-8      	; 0x8a <main+0xa>
-  92:	00 c0       	rjmp	.+0      	; 0x94 <main+0x14>
-  94:	00 00       	nop
-  96:	2d 98       	cbi	0x05, 5	; 5
-  98:	2f ef       	ldi	r18, 0xFF	; 255
-  9a:	84 e3       	ldi	r24, 0x34	; 52
-  9c:	9c e0       	ldi	r25, 0x0C	; 12
-  9e:	21 50       	subi	r18, 0x01	; 1
-  a0:	80 40       	sbci	r24, 0x00	; 0
-  a2:	90 40       	sbci	r25, 0x00	; 0
-  a4:	e1 f7       	brne	.-8      	; 0x9e <main+0x1e>
-  a6:	00 c0       	rjmp	.+0      	; 0xa8 <main+0x28>
-  a8:	00 00       	nop
-  aa:	eb cf       	rjmp	.-42     	; 0x82 <main+0x2>
+00000080 <ledLight>:
+  80:	25 b1       	in	r18, 0x05	; 5
+  82:	89 2b       	or	r24, r25
+  84:	49 f4       	brne	.+18     	; 0x98 <ledLight+0x18>
+  86:	81 e0       	ldi	r24, 0x01	; 1
+  88:	90 e0       	ldi	r25, 0x00	; 0
+  8a:	01 c0       	rjmp	.+2      	; 0x8e <ledLight+0xe>
+  8c:	88 0f       	add	r24, r24
+  8e:	6a 95       	dec	r22
+  90:	ea f7       	brpl	.-6      	; 0x8c <ledLight+0xc>
+  92:	80 95       	com	r24
+  94:	82 23       	and	r24, r18
+  96:	07 c0       	rjmp	.+14     	; 0xa6 <ledLight+0x26>
+  98:	81 e0       	ldi	r24, 0x01	; 1
+  9a:	90 e0       	ldi	r25, 0x00	; 0
+  9c:	01 c0       	rjmp	.+2      	; 0xa0 <ledLight+0x20>
+  9e:	88 0f       	add	r24, r24
+  a0:	6a 95       	dec	r22
+  a2:	ea f7       	brpl	.-6      	; 0x9e <ledLight+0x1e>
+  a4:	82 2b       	or	r24, r18
+  a6:	85 b9       	out	0x05, r24	; 5
+  a8:	08 95       	ret
 
-000000ac <_exit>:
-  ac:	f8 94       	cli
+000000aa <main>:
+  aa:	25 9a       	sbi	0x04, 5	; 4
+  ac:	65 e0       	ldi	r22, 0x05	; 5
+  ae:	70 e0       	ldi	r23, 0x00	; 0
+  b0:	80 e0       	ldi	r24, 0x00	; 0
+  b2:	90 e0       	ldi	r25, 0x00	; 0
+  b4:	0e 94 40 00 	call	0x80	; 0x80 <ledLight>
+  b8:	c0 e0       	ldi	r28, 0x00	; 0
+  ba:	d0 e0       	ldi	r29, 0x00	; 0
+  bc:	8a ef       	ldi	r24, 0xFA	; 250
+  be:	90 e0       	ldi	r25, 0x00	; 0
+  c0:	ef e9       	ldi	r30, 0x9F	; 159
+  c2:	ff e0       	ldi	r31, 0x0F	; 15
+  c4:	31 97       	sbiw	r30, 0x01	; 1
+  c6:	f1 f7       	brne	.-4      	; 0xc4 <main+0x1a>
+  c8:	00 c0       	rjmp	.+0      	; 0xca <main+0x20>
+  ca:	00 00       	nop
+  cc:	01 97       	sbiw	r24, 0x01	; 1
+  ce:	c1 f7       	brne	.-16     	; 0xc0 <main+0x16>
+  d0:	f1 e0       	ldi	r31, 0x01	; 1
+  d2:	cf 27       	eor	r28, r31
+  d4:	65 e0       	ldi	r22, 0x05	; 5
+  d6:	70 e0       	ldi	r23, 0x00	; 0
+  d8:	ce 01       	movw	r24, r28
+  da:	0e 94 40 00 	call	0x80	; 0x80 <ledLight>
+  de:	ee cf       	rjmp	.-36     	; 0xbc <main+0x12>
 
-000000ae <__stop_program>:
-  ae:	ff cf       	rjmp	.-2      	; 0xae <__stop_program>
+000000e0 <_exit>:
+  e0:	f8 94       	cli
+
+000000e2 <__stop_program>:
+  e2:	ff cf       	rjmp	.-2      	; 0xe2 <__stop_program>
