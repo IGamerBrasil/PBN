@@ -15,7 +15,7 @@
 #define paraIrriga 5000
 
 void irrigaGramado(int Tirriga, int umidade);
-void picarLeds(int umidade);
+void piscarLeds(int umidade);
 void campoSemIrrigacao(int Tirriga, int umidade);
 
 int main(void)  {
@@ -30,8 +30,6 @@ int main(void)  {
     int valorIrriga;
     int valorBotao;
     int Tirriga = 0;
-
-    // enquanto botao ativo
 
     while(1)    {
         _delay_ms(1);
@@ -51,13 +49,14 @@ int main(void)  {
                             Tirriga = 0; 
                         }
                         else{
-                            if(umidade >= 4)
+                            if(umidade >= 4){
                                 valorIrriga = OFF;
                                 Tirriga = 0;
-                            else
+                            }
+                            else{
                                 irrigaGramado(Tirriga, nivUmidade);
-                        }
-                        
+                            }
+                        }                        
                         break;
                     default:
                         Tirriga++;
@@ -77,17 +76,23 @@ int main(void)  {
 void irrigaGramado(int Tirriga, int umidade){
     int inverteLed = Tirriga%tempPisca;
     if(inverteLed == 0)
-        picarLeds(umidade);
+        piscarLeds(umidade);
     int Tumidade = Tirriga%3000;
     if((Tumidade==0)&&(umidade<4))
         umidade++;
     switch (umidade)
     {
     case 1:
-        PORTB = (1 << N1);
+        PORTB |= (1 << N1);
         break;
-    
+    case 2:
+        PORTB |= (1 << N2);
+        break;
+    case 3:
+        PORTB |= (1 << N3);
+        break;
     default:
+        PORTB |= (1 << N4);
         break;
     }
 }
@@ -119,7 +124,7 @@ void campoSemIrrigacao(int Tirriga, int umidade){
     }
 }
 
-void picarLeds(int nivUmidade){
+void piscarLeds(int nivUmidade){
     switch(nivUmidade){
         case 0:
             PORTB ^= (1 << N1);
