@@ -96,36 +96,29 @@ void campoSemIrrigacao(int Tirriga, int umidade){
     //contabilizar tempo
     int tempo=Tirriga%paraIrriga;
     //atualizar nivel
-    if(tempo==0)&&(umidade >= 1) // chegou o momento de atualizar o nivel
+    if(tempo==0)&&(umidade >= 1){ // chegou o momento de atualizar o nivel
       umidade--;
     //atuar nos leds
-      for(int i=1; i<=4; i++){
-            switch (i)
-            {
-            case 1:
-                PORTB |= (1 << N1);
-                break;
-            case 2:
-                PORTB |= (1 << N2);
-                break;
-            case 3:
-                PORTB |= (1 << N3);
-                break;
-            default:
-                break;
-            }
-      }
+        switch (umidade)
+        {
+           case 1:
+               PORTB &= ~(1 << N1);
+               break;
+           case 2:
+               PORTB &= ~(1 << N2);
+               break;
+           case 3:
+               PORTB &= ~(1 << N3);
+               break;
+           default:
+               break;
+        }
+    }
       // acender leds do nível q estou para baixo
       if(i<=nivel)
         acendeO
       // apagar leds acima
-    int inverteLed = Tirriga%tempPisca;
-    Tirriga++;
-    if(inverteLed == 0)
-        picarLeds(umidade);
-    int Tumidade = Tirriga%3000;
-    if((Tumidade==0)&&(umidade))
-        umidade++;
+   
 }
 
 void picarLeds(int nivUmidade){
