@@ -78,7 +78,7 @@ Circuit Id: Ground-44
 
 Unique  Id: Led-37: 
 Circuit Id: Led-35
-<item Threshold="2.4" valLabely="0" Grounded="false" boardPos="-1e+06,-1e+06" Color="0" vflip="1" mainComp="false" id="Led-35" Resistance="0.6" x="500" boardRot="-1e+06" itemtype="Led" labelrot="0" Show_id="false" valLabRot="0" MaxCurrent="0.03" objectName="Led-37" hflip="1" labelx="-16" circPos="0,0" circRot="nan" rotation="0" valLabelx="0" labely="-24" y="384"/>
+<item Threshold="2.4" valLabely="0" Grounded="false" boardPos="-1e+06,-1e+06" Color="2" vflip="1" mainComp="false" id="Led-35" Resistance="0.6" x="500" boardRot="-1e+06" itemtype="Led" labelrot="0" Show_id="false" valLabRot="0" MaxCurrent="0.03" objectName="Led-37" hflip="1" labelx="-16" circPos="0,0" circRot="nan" rotation="0" valLabelx="0" labely="-24" y="384"/>
 
 Unique  Id: Led-36: 
 Circuit Id: Led-35
@@ -86,7 +86,7 @@ Circuit Id: Led-35
 
 Unique  Id: Led-35: 
 Circuit Id: Led-35
-<item Threshold="2.4" valLabely="0" Grounded="false" boardPos="-1e+06,-1e+06" Color="0" vflip="1" mainComp="false" id="Led-35" Resistance="0.6" x="500" boardRot="-1e+06" itemtype="Led" labelrot="0" Show_id="false" valLabRot="0" MaxCurrent="0.03" objectName="Led-35" hflip="1" labelx="-16" circPos="0,0" circRot="nan" rotation="0" valLabelx="0" labely="-24" y="444"/>
+<item Threshold="2.4" valLabely="0" Grounded="false" boardPos="-1e+06,-1e+06" Color="1" vflip="1" mainComp="false" id="Led-35" Resistance="0.6" x="500" boardRot="-1e+06" itemtype="Led" labelrot="0" Show_id="false" valLabRot="0" MaxCurrent="0.03" objectName="Led-35" hflip="1" labelx="-16" circPos="0,0" circRot="nan" rotation="0" valLabelx="0" labely="-24" y="444"/>
 
 Unique  Id: Push-12: 
 Circuit Id: Push-12

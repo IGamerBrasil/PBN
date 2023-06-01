@@ -3,31 +3,25 @@ code.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000040  00800100  00001972  00001a06  2**0
+  0 .data         00000040  00800100  00001908  0000199c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00001972  00000000  00000000  00000094  2**1
+  1 .text         00001908  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          0000023c  00800140  00800140  00001a46  2**0
+  2 .bss          0000023c  00800140  00800140  000019dc  2**0
                   ALLOC
-  3 .comment      00000012  00000000  00000000  00001a46  2**0
+  3 .stab         00001a88  00000000  00000000  000019dc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00001385  00000000  00000000  00003464  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .comment      00000011  00000000  00000000  000047e9  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00001a58  2**2
-                  CONTENTS, READONLY, OCTETS
-  5 .debug_aranges 00000108  00000000  00000000  00001a98  2**3
-                  CONTENTS, READONLY, DEBUGGING, OCTETS
-  6 .debug_info   0000197c  00000000  00000000  00001ba0  2**0
-                  CONTENTS, READONLY, DEBUGGING, OCTETS
-  7 .debug_abbrev 00000b17  00000000  00000000  0000351c  2**0
-                  CONTENTS, READONLY, DEBUGGING, OCTETS
-  8 .debug_line   000013e3  00000000  00000000  00004033  2**0
-                  CONTENTS, READONLY, DEBUGGING, OCTETS
-  9 .debug_frame  00000260  00000000  00000000  00005418  2**2
-                  CONTENTS, READONLY, DEBUGGING, OCTETS
- 10 .debug_str    00000556  00000000  00000000  00005678  2**0
-                  CONTENTS, READONLY, DEBUGGING, OCTETS
- 11 .debug_line_str 00000200  00000000  00000000  00005bce  2**0
-                  CONTENTS, READONLY, DEBUGGING, OCTETS
- 12 .debug_loclists 00000588  00000000  00000000  00005dce  2**0
-                  CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_rnglists 0000001b  00000000  00000000  00006356  2**0
-                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  6 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000047fc  2**2
+                  CONTENTS, READONLY
+  7 .debug_info   000005f4  00000000  00000000  0000483c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 000005a2  00000000  00000000  00004e30  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   0000001a  00000000  00000000  000053d2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000208  00000000  00000000  000053ec  2**0
+                  CONTENTS, READONLY, DEBUGGING

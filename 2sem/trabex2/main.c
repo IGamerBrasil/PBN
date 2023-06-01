@@ -6,6 +6,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+//leds
+#define LEDR PC0
+#define LEDA PC1
+#define LEDG PC2
+
+//botoes
 #define CREDIT_50 PD0
 #define CREDIT_25 PD1
 #define CREDIT_100 PD2
@@ -18,6 +24,8 @@ void credit50(double *m, char s[]);
 void credit100(double *m, char s[]);
 
 void timer_park(double *m, char stringTemp[]);
+
+void piscarLeds(double *m);
 
 int t = 0;
 
@@ -40,6 +48,10 @@ uint8_t glyph[] = { 0b00010000, 0b00100100, 0b11100000, 0b00100100, 0b00010000 }
 int main(void)
 {
 
+    DDRC |= (1<<LEDG);
+    DDRC |= (1<<LEDA);
+    DDRC |= (1<<LEDR);
+
     DDRD &= ~(1<< CREDIT_50);
     DDRD &= ~(1<< CREDIT_25);
     DDRD &= ~(1<< CREDIT_100);
@@ -55,10 +67,17 @@ int main(void)
     nokia_lcd_set_cursor(0, 12);
     nokia_lcd_write_string("INSIRA MOEDA\001", 1);
     nokia_lcd_render();
+    PORTC |= (1 << LEDG);
     while(1){
+
+            piscarLeds(&moeda);
+
             if(PIND & (1 << CREDIT_100)){// LE PD0
                     //PORTC ^= (1 << PC2); //TOGGLE EM PB5 1 OU 0
                     //CONTROLE
+                    if(PORTC |= (1 << LEDG)){
+                        PORTC &= ~(1 << LEDG);
+                    }else{piscarLeds(&moeda);}
                     credit100(&moeda, valorString);
                     while (PIND & (1 << CREDIT_100))
                         _delay_ms(1);//debounce  
@@ -67,6 +86,9 @@ int main(void)
             if(PIND & (1 << CREDIT_50)){// LE PD0
                     //PORTC ^= (1 << PC2); //TOGGLE EM PB5 1 OU 0
                     //CONTROLE
+                    if(PORTC |= (1 << LEDG)){
+                        PORTC &= ~(1 << LEDG);
+                    }else{piscarLeds(&moeda);}
                     credit50(&moeda, valorString);
                     while (PIND & (1 << CREDIT_50))
                         _delay_ms(1);//debounce 
@@ -75,6 +97,9 @@ int main(void)
             if(PIND & (1 << CREDIT_25)){// LE PD0
                     //PORTC ^= (1 << PC2); //TOGGLE EM PB5 1 OU 0
                     //CONTROLE
+                    if(PORTC |= (1 << LEDG)){
+                        PORTC &= ~(1 << LEDG);
+                    }else{piscarLeds(&moeda);}
                     credit25(&moeda, valorString);
                     while (PIND & (1 << CREDIT_25))
                         _delay_ms(1);//debounce  
@@ -99,7 +124,9 @@ void credit100(double *m, char s[]){
          nokia_lcd_clear();
          nokia_lcd_custom(1,glyph);
          if((*m+1) <= VAL_MAX || *m == VAL_MAX){
-             *m+=1;
+             if(*m != VAL_MAX){
+                *m+=1;
+             }
              dtostrf(*m,4,2, s);
              nokia_lcd_write_string("Quantia: ",1);
              nokia_lcd_write_string(s,1);
@@ -124,7 +151,9 @@ void credit50(double *m, char s[]){
         nokia_lcd_clear();
         nokia_lcd_custom(1,glyph);
         if((*m+0.50) <= VAL_MAX || *m == VAL_MAX){
-            *m+=0.50;
+            if(*m != VAL_MAX){
+                *m+=0.50;
+            }
             dtostrf(*m,4,2, s);
             nokia_lcd_write_string("Quantia: ",1);
             nokia_lcd_write_string(s,1);
@@ -150,7 +179,9 @@ void credit25(double *m, char s[]){
          nokia_lcd_clear();
          nokia_lcd_custom(1,glyph);
          if((*m+0.25) <= VAL_MAX || *m == VAL_MAX){
-            *m+=0.25;
+            if(*m != VAL_MAX){
+                *m+=0.25;
+            }
             dtostrf(*m,4,2, s);
             nokia_lcd_write_string("Quantia: ",1);
             nokia_lcd_write_string(s,1);
@@ -179,7 +210,8 @@ void timer_park(double *m, char stringTemp[]){
     sei();
 
     t = 10;
-
+    PORTC |= (1 << LEDA);
+    PORTC &= ~(1 << LEDG);
     while(t > 0){
         nokia_lcd_clear();
         sprintf(stringTemp, "Tempo: %d", t);
@@ -187,13 +219,24 @@ void timer_park(double *m, char stringTemp[]){
         nokia_lcd_set_cursor(0, 10);
         nokia_lcd_render();
     }
-
     cli();
     *m = 0.0;
+    PORTC &= ~(1 << LEDA);
     nokia_lcd_clear();
     nokia_lcd_write_string("0 REAIS",1);
     nokia_lcd_set_cursor(0, 12);
     nokia_lcd_write_string("INSIRA MOEDA\001", 1);
     nokia_lcd_render();
     
+}
+
+void piscarLeds(double *moeda){
+    _delay_ms(1); 
+    if(*moeda<1.5){
+        PORTC ^= (1 << LEDR);   
+    }
+    else{
+        PORTC &= ~(1 << LEDR);
+        PORTC |= (1 << LEDG);
+    }        
 }
